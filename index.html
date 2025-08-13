@@ -1,840 +1,316 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Developer</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --bg-primary: #0d1117;
-            --bg-secondary: #161b22;
-            --bg-tertiary: #21262d;
-            --text-primary: #f0f6fc;
-            --text-secondary: #8b949e;
-            --accent: #58a6ff;
-            --accent-hover: #79c0ff;
-            --border: #30363d;
-            --success: #3fb950;
-            --warning: #d29922;
-            --gradient: linear-gradient(135deg, #58a6ff, #a5a5f5, #ff6b9d);
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header */
-        .header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(13, 17, 23, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(ellipse at center, rgba(88, 166, 255, 0.1), transparent 70%);
-            pointer-events: none;
-        }
-
-        .hero-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            align-items: center;
-            gap: 60px;
-            width: 100%;
-        }
-
-        .hero-text h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: fadeInUp 1s ease;
-        }
-
-        .hero-text .subtitle {
-            font-size: 1.5rem;
-            color: var(--text-secondary);
-            margin-bottom: 30px;
-            animation: fadeInUp 1s ease 0.2s both;
-        }
-
-        .hero-text p {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            margin-bottom: 40px;
-            line-height: 1.8;
-            animation: fadeInUp 1s ease 0.4s both;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 20px;
-            animation: fadeInUp 1s ease 0.6s both;
-        }
-
-        .btn {
-            padding: 15px 30px;
-            border: none;
-            border-radius: 10px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-primary {
-            background: var(--accent);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: var(--accent-hover);
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-primary);
-            border: 2px solid var(--border);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            transform: translateY(-2px);
-        }
-
-        .hero-visual {
-            position: relative;
-            animation: fadeInRight 1s ease 0.8s both;
-        }
-
-        .code-window {
-            background: var(--bg-secondary);
-            border-radius: 15px;
-            padding: 20px;
-            border: 1px solid var(--border);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .code-header {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-
-        .code-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-
-        .code-dot:nth-child(1) { background: #ff5f57; }
-        .code-dot:nth-child(2) { background: #ffbd2e; }
-        .code-dot:nth-child(3) { background: #28ca42; }
-
-        .code-content {
-            font-family: 'Fira Code', monospace;
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        .code-line {
-            opacity: 0;
-            animation: typewriter 0.5s ease forwards;
-        }
-
-        .code-line:nth-child(1) { animation-delay: 1s; }
-        .code-line:nth-child(2) { animation-delay: 1.2s; }
-        .code-line:nth-child(3) { animation-delay: 1.4s; }
-        .code-line:nth-child(4) { animation-delay: 1.6s; }
-        .code-line:nth-child(5) { animation-delay: 1.8s; }
-
-        /* Stats Section */
-        .stats {
-            padding: 100px 0;
-            background: var(--bg-secondary);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .stat-card {
-            background: var(--bg-tertiary);
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            border: 1px solid var(--border);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--gradient);
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(88, 166, 255, 0.2);
-        }
-
-        .stat-number {
-            font-size: 3rem;
-            font-weight: bold;
-            color: var(--accent);
-            margin-bottom: 10px;
-        }
-
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-        }
-
-        /* Projects Section */
-        .projects {
-            padding: 100px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 3rem;
-            margin-bottom: 20px;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 1.2rem;
-            margin-bottom: 60px;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-        }
-
-        .project-card {
-            background: var(--bg-secondary);
-            border-radius: 15px;
-            padding: 30px;
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(88, 166, 255, 0.1), rgba(165, 165, 245, 0.1));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .project-card:hover::before {
-            opacity: 1;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent);
-            box-shadow: 0 20px 40px rgba(88, 166, 255, 0.2);
-        }
-
-        .project-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 15px;
-        }
-
-        .project-title {
-            font-size: 1.4rem;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .project-links {
-            display: flex;
-            gap: 10px;
-        }
-
-        .project-link {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .project-link:hover {
-            color: var(--accent);
-        }
-
-        .project-description {
-            color: var(--text-secondary);
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-
-        .project-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .tech-tag {
-            background: var(--bg-tertiary);
-            color: var(--accent);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            border: 1px solid var(--border);
-        }
-
-        /* Skills Section */
-        .skills {
-            padding: 100px 0;
-            background: var(--bg-secondary);
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-        }
-
-        .skill-category {
-            background: var(--bg-tertiary);
-            padding: 30px;
-            border-radius: 15px;
-            border: 1px solid var(--border);
-        }
-
-        .category-title {
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin-bottom: 20px;
-            color: var(--accent);
-        }
-
-        .skill-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .skill-item {
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
-        }
-
-        .skill-item:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        /* Contact Section */
-        .contact {
-            padding: 100px 0;
-            text-align: center;
-        }
-
-        .contact-content {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .contact-link {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 1.1rem;
-            transition: color 0.3s ease;
-        }
-
-        .contact-link:hover {
-            color: var(--accent);
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translateX(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes typewriter {
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .hero-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .hero-text h1 {
-                font-size: 2.5rem;
-            }
-
-            .cta-buttons {
-                justify-content: center;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .contact-links {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-
-        /* Floating particles */
-        .particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .particle {
-            position: absolute;
-            background: var(--accent);
-            border-radius: 50%;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sasikumar Alakesan · Portfolio</title>
+  <meta name="description" content="Application Lead specializing in Android, AI-powered mobile, and CAD tools. Portfolio of projects, skills, and experience." />
+  <meta name="color-scheme" content="light dark">
+  <meta property="og:title" content="Sasikumar Alakesan · Portfolio" />
+  <meta property="og:description" content="Android · AI · CAD · Solution Architecture" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🛠️</text></svg>">
+  <style>
+    :root{
+      --bg: #0b0c10;          /* dark base */
+      --surface: #111217;     /* cards */
+      --text: #e7e7ea;        /* main text */
+      --muted: #b6b6c2;       /* secondary text */
+      --brand: #6ee7b7;       /* accent mint */
+      --brand-2: #60a5fa;     /* accent blue */
+      --ring: rgba(110,231,183,.35);
+      --border: #23242d;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+      --maxw: 1100px;
+    }
+    @media (prefers-color-scheme: light) {
+      :root{
+        --bg:#f8fafc; --surface:#ffffff; --text:#0b0c10; --muted:#4b5563; --border:#e5e7eb; --shadow:0 10px 30px rgba(2,6,23,.08);
+      }
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{max-width:var(--maxw);margin-inline:auto;padding:24px}
+    .grid{display:grid;gap:20px}
+    .btn{
+      display:inline-flex;align-items:center;gap:.6rem;padding:.7rem 1rem;border-radius:999px;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#0b0c10;font-weight:700;border:0;box-shadow:var(--shadow);
+    }
+    .btn.ghost{background:transparent;color:var(--text);border:1px solid var(--border);box-shadow:none}
+    .chip{display:inline-block;padding:.35rem .7rem;border-radius:999px;border:1px solid var(--border);background:linear-gradient(180deg,transparent,rgba(255,255,255,.02));color:var(--muted);font-weight:600;font-size:.9rem;margin:.25rem .25rem 0 0}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .card-pad{padding:20px}
+    .muted{color:var(--muted)}
+    .title{font-size:clamp(1.6rem,1.1rem + 2vw,2.6rem);line-height:1.2;margin:0}
+    .subtitle{font-size:clamp(1rem,.8rem + .8vw,1.25rem);color:var(--muted);margin:.25rem 0 0}
+    .section-title{font-size:1.6rem;margin:0 0 .5rem;font-weight:800}
+    header.nav{position:sticky;top:0;backdrop-filter:saturate(160%) blur(10px);background:color-mix(in oklab, var(--bg) 80%, transparent);border-bottom:1px solid var(--border);z-index:10}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .nav-brand{display:flex;align-items:center;gap:.7rem;font-weight:800}
+    .nav-links{display:flex;gap:.4rem;flex-wrap:wrap}
+    .nav-links a{padding:.55rem .9rem;border-radius:999px;border:1px solid transparent}
+    .nav-links a:hover{border-color:var(--border);background:rgba(255,255,255,.03)}
+    .hero{padding-block:48px}
+    .hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:24px}
+    .hero .portrait{aspect-ratio:1/1;border-radius:24px;border:1px solid var(--border);overflow:hidden;background:linear-gradient(180deg,#0ea5e9,#22c55e)}
+    .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+    .badges{margin-top:14px}
+    section{padding-block:24px}
+    .projects{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+    .project .hdr{display:flex;align-items:center;justify-content:space-between;gap:8px}
+    .project h3{margin:.2rem 0 .4rem;font-size:1.1rem}
+    .project p{margin:0;color:var(--muted)}
+    .timeline{position:relative}
+    .timeline::before{content:"";position:absolute;left:10px;top:0;bottom:0;width:2px;background:var(--border)}
+    .tl-item{position:relative;padding-left:34px;margin-bottom:16px}
+    .tl-item::before{content:"";position:absolute;left:3px;top:.45rem;width:14px;height:14px;border-radius:999px;background:linear-gradient(135deg,var(--brand),var(--brand-2));box-shadow:0 0 0 4px color-mix(in oklab, var(--bg) 70%, transparent)}
+    .contact-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:20px}
+    form{display:grid;gap:12px}
+    input,textarea{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:var(--surface);color:var(--text)}
+    footer{padding:32px 24px;border-top:1px solid var(--border);color:var(--muted)}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    @media (max-width: 860px){
+      .hero-grid{grid-template-columns:1fr}
+      .contact-grid{grid-template-columns:1fr}
+      .nav-links{display:none}
+    }
+    @media print{
+      header.nav, .cta, form, .nav-links{display:none !important}
+      body{background:#fff;color:#000}
+      .card,.chip{border-color:#bbb;box-shadow:none}
+    }
+  </style>
+  <script>
+    // Simple hash-aware active link styling
+    addEventListener('hashchange',()=>{
+      const links=document.querySelectorAll('.nav-links a');
+      links.forEach(a=>a.classList.toggle('active', a.getAttribute('href')===location.hash));
+    });
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Sasikumar Alakesan",
+    "jobTitle": "Application Lead",
+    "sameAs": [
+      "https://www.linkedin.com/in/yourprofile",
+      "https://github.com/yourusername"
+    ],
+    "knowsAbout": ["Android", "Kotlin", "Jetpack Compose", "Clean Architecture", "OpenGL ES", "AI", "CAD"],
+    "address": {"@type":"PostalAddress","addressCountry":"IN"}
+  }
+  </script>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <nav class="nav container">
-            <div class="logo">YourName</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+  <!-- Nav -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <div class="nav-brand">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 3l7 4v10l-7 4-7-4V7l7-4z" stroke="currentColor" stroke-width="1.5"/></svg>
+        <span>Sasikumar Alakesan</span>
+      </div>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="particles">
-            <div class="particle" style="width: 4px; height: 4px; top: 20%; left: 10%; animation-delay: 0s;"></div>
-            <div class="particle" style="width: 6px; height: 6px; top: 60%; left: 80%; animation-delay: 2s;"></div>
-            <div class="particle" style="width: 3px; height: 3px; top: 80%; left: 20%; animation-delay: 4s;"></div>
+  <!-- Hero -->
+  <section class="hero container">
+    <div class="hero-grid">
+      <div>
+        <h1 class="title">Application Lead · Android & AI Enthusiast · Solution Architect in Progress</h1>
+        <p class="subtitle">Bridging mobile innovation with intelligent solutions.</p>
+        <p class="muted">I’m an Application Lead with 10+ years of experience building high‑quality Android apps. I focus on clean architecture, scalable design, and integrating AI into mobile solutions. I’m currently exploring advanced CAD tools, AI‑powered app generation, and moving toward Solution Architecture.</p>
+        <div class="cta">
+          <a class="btn" href="#projects">View Projects</a>
+          <a class="btn ghost" href="mailto:your.email@example.com">Email Me</a>
+          <a class="btn ghost" href="#" aria-label="Download résumé (PDF)">Résumé</a>
         </div>
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1>Hi, I'm Your Name</h1>
-                    <div class="subtitle">Full-Stack Developer</div>
-                    <p>Passionate about creating innovative solutions and beautiful user experiences. I love turning complex problems into simple, elegant designs.</p>
-                    <div class="cta-buttons">
-                        <a href="#projects" class="btn btn-primary">View My Work</a>
-                        <a href="#contact" class="btn btn-secondary">Get In Touch</a>
-                    </div>
-                </div>
-                <div class="hero-visual">
-                    <div class="code-window">
-                        <div class="code-header">
-                            <div class="code-dot"></div>
-                            <div class="code-dot"></div>
-                            <div class="code-dot"></div>
-                        </div>
-                        <div class="code-content">
-                            <div class="code-line" style="color: #ff7b72;">const</div>
-                            <div class="code-line" style="color: #79c0ff;"> developer = {</div>
-                            <div class="code-line" style="color: #a5a5f5;">  name: "Your Name",</div>
-                            <div class="code-line" style="color: #a5a5f5;">  passion: "coding",</div>
-                            <div class="code-line" style="color: #79c0ff;">}</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="badges" aria-label="Key areas">
+          <span class="chip">Android (Kotlin, Java)</span>
+          <span class="chip">Jetpack Compose · MVVM</span>
+          <span class="chip">Clean Architecture</span>
+          <span class="chip">OpenGL ES 2.0</span>
+          <span class="chip">AI · RAG concepts</span>
+          <span class="chip">CAD & Geometry</span>
         </div>
-    </section>
+      </div>
+      <div>
+        <div class="portrait card"></div>
+      </div>
+    </div>
+  </section>
 
-    <!-- Stats Section -->
-    <section class="stats">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-number">50+</div>
-                    <div class="stat-label">Projects Completed</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">3+</div>
-                    <div class="stat-label">Years Experience</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">20+</div>
-                    <div class="stat-label">Technologies</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">100+</div>
-                    <div class="stat-label">GitHub Commits</div>
-                </div>
-            </div>
+  <!-- About -->
+  <section id="about" class="container">
+    <div class="card card-pad">
+      <h2 class="section-title">About Me</h2>
+      <p>With a strong foundation in Android development and expertise in designing scalable, modular applications, I’ve led projects across domains like CAD-based floor planning, AI‑powered tools, and enterprise mobile apps. I build products that not only perform well, but solve real problems elegantly.</p>
+      <p>Recently, I’ve focused on integrating AI with mobile platforms, creating intelligent design tools, and developing custom CAD solutions with OpenGL ES. I enjoy mentoring teams, shaping solution architecture, and delivering features users love.</p>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="container">
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+      <div class="card card-pad">
+        <h2 class="section-title">Mobile Development</h2>
+        <div class="chips">
+          <span class="chip">Android (Kotlin, Java)</span>
+          <span class="chip">Jetpack Compose</span>
+          <span class="chip">MVVM</span>
+          <span class="chip">Clean Architecture</span>
+          <span class="chip">Flutter (Dart)</span>
         </div>
-    </section>
+      </div>
+      <div class="card card-pad">
+        <h2 class="section-title">Specialized Domains</h2>
+        <span class="chip">Custom CAD tools (2D)</span>
+        <span class="chip">Snapping & constraints</span>
+        <span class="chip">OpenGL ES 2.0 rendering</span>
+        <span class="chip">Gesture handling (zoom · pan · rotate)</span>
+      </div>
+      <div class="card card-pad">
+        <h2 class="section-title">Backend & Data</h2>
+        <span class="chip">REST APIs</span>
+        <span class="chip">Firebase</span>
+        <span class="chip">SQLite · Room</span>
+        <span class="chip">Python (AI/ML foundations)</span>
+        <span class="chip">RAG concepts</span>
+      </div>
+      <div class="card card-pad">
+        <h2 class="section-title">Other</h2>
+        <span class="chip">Team Leadership</span>
+        <span class="chip">Solution Architecture</span>
+        <span class="chip">Cross‑platform strategy</span>
+      </div>
+    </div>
+  </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <div class="container">
-            <h2 class="section-title">Featured Projects</h2>
-            <p class="section-subtitle">Here are some of my recent works</p>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-header">
-                        <div>
-                            <h3 class="project-title">E-Commerce Platform</h3>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">🔗</a>
-                            <a href="#" class="project-link">📁</a>
-                        </div>
-                    </div>
-                    <p class="project-description">A full-stack e-commerce solution with React, Node.js, and MongoDB. Features include user authentication, payment processing, and admin dashboard.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">React</span>
-                        <span class="tech-tag">Node.js</span>
-                        <span class="tech-tag">MongoDB</span>
-                        <span class="tech-tag">Stripe</span>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-header">
-                        <div>
-                            <h3 class="project-title">Task Management App</h3>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">🔗</a>
-                            <a href="#" class="project-link">📁</a>
-                        </div>
-                    </div>
-                    <p class="project-description">A collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Vue.js</span>
-                        <span class="tech-tag">Socket.io</span>
-                        <span class="tech-tag">Express</span>
-                        <span class="tech-tag">PostgreSQL</span>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-header">
-                        <div>
-                            <h3 class="project-title">AI Chat Bot</h3>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">🔗</a>
-                            <a href="#" class="project-link">📁</a>
-                        </div>
-                    </div>
-                    <p class="project-description">An intelligent chatbot powered by natural language processing, capable of understanding context and providing helpful responses.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">TensorFlow</span>
-                        <span class="tech-tag">FastAPI</span>
-                        <span class="tech-tag">Docker</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- Projects -->
+  <section id="projects" class="container">
+    <h2 class="section-title">Projects</h2>
+    <div class="grid projects">
+      <article class="card card-pad project">
+        <div class="hdr"><h3>AI‑Powered CAD Floor Planner</h3><span class="chip">Android</span></div>
+        <p>Custom Android CAD app for drawing, editing, and measuring floor plans. Features snapping, constraints, and real‑time area/perimeter calculations with AI‑powered layout suggestions.</p>
+        <p class="muted">Keywords: Kotlin, OpenGL ES, Geometry, AI</p>
+      </article>
+      <article class="card card-pad project">
+        <div class="hdr"><h3>OpenGL ES Drawing Tool</h3><span class="chip">OpenGL ES 2.0</span></div>
+        <p>Freehand and shape‑based drawing with real‑time zoom, pan, and grid snapping. Includes undo/redo, color picker, stroke thickness control, and PNG export.</p>
+        <p class="muted">Keywords: Android Canvas, Rendering, UX</p>
+      </article>
+      <article class="card card-pad project">
+        <div class="hdr"><h3>AI‑Driven Mobile App Generator (Prototype)</h3><span class="chip">AI</span></div>
+        <p>Prototype system to generate functional mobile apps from plain‑text descriptions using open‑source models, integrated with Android front‑ends.</p>
+        <p class="muted">Keywords: LLMs, Tooling, DX</p>
+      </article>
+      <article class="card card-pad project">
+        <div class="hdr"><h3>Enterprise Android Solutions</h3><span class="chip">Architecture</span></div>
+        <p>Led end‑to‑end development of multiple high‑performance apps using Clean Architecture, collaborating across teams to deliver resilient features at scale.</p>
+        <p class="muted">Keywords: MVVM, Testing, CI/CD</p>
+      </article>
+    </div>
+  </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-        <div class="container">
-            <h2 class="section-title">Skills & Technologies</h2>
-            <p class="section-subtitle">Technologies I work with</p>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3 class="category-title">Frontend</h3>
-                    <div class="skill-list">
-                        <span class="skill-item">HTML5</span>
-                        <span class="skill-item">CSS3</span>
-                        <span class="skill-item">JavaScript</span>
-                        <span class="skill-item">TypeScript</span>
-                        <span class="skill-item">React</span>
-                        <span class="skill-item">Vue.js</span>
-                        <span class="skill-item">Sass</span>
-                        <span class="skill-item">Tailwind CSS</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3 class="category-title">Backend</h3>
-                    <div class="skill-list">
-                        <span class="skill-item">Node.js</span>
-                        <span class="skill-item">Python</span>
-                        <span class="skill-item">Express.js</span>
-                        <span class="skill-item">Django</span>
-                        <span class="skill-item">FastAPI</span>
-                        <span class="skill-item">RESTful APIs</span>
-                        <span class="skill-item">GraphQL</span>
-                        <span class="skill-item">WebSocket</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3 class="category-title">Database & Tools</h3>
-                    <div class="skill-list">
-                        <span class="skill-item">MongoDB</span>
-                        <span class="skill-item">PostgreSQL</span>
-                        <span class="skill-item">MySQL</span>
-                        <span class="skill-item">Redis</span>
-                        <span class="skill-item">Git</span>
-                        <span class="skill-item">Docker</span>
-                        <span class="skill-item">AWS</span>
-                        <span class="skill-item">Vercel</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- Experience -->
+  <section id="experience" class="container">
+    <h2 class="section-title">Experience</h2>
+    <div class="card card-pad timeline">
+      <div class="tl-item">
+        <h3>Application Lead <span class="muted">— Current Company</span></h3>
+        <p class="muted">YYYY – Present</p>
+        <ul>
+          <li>Lead design and development of Android applications with modern architectures.</li>
+          <li>Mentor developers and drive cross‑functional collaboration.</li>
+          <li>Champion AI integrations and new tool development.</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <h3>Senior Android Developer <span class="muted">— Previous Company</span></h3>
+        <p class="muted">YYYY – YYYY</p>
+        <ul>
+          <li>Built complex, scalable features and optimized app performance.</li>
+          <li>Owned key modules from concept to deployment.</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <h3>Android Developer <span class="muted">— Previous Company</span></h3>
+        <p class="muted">YYYY – YYYY</p>
+        <ul>
+          <li>Developed and maintained native Android apps.</li>
+          <li>Introduced architectural improvements to improve maintainability.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="contact-content">
-                <h2 class="section-title">Let's Work Together</h2>
-                <p class="section-subtitle">Have a project in mind? Let's discuss how we can bring your ideas to life.</p>
-                <div class="contact-links">
-                    <a href="mailto:your.email@example.com" class="contact-link">
-                        📧 your.email@example.com
-                    </a>
-                    <a href="https://github.com/yourusername" class="contact-link">
-                        🐙 GitHub
-                    </a>
-                    <a href="https://linkedin.com/in/yourusername" class="contact-link">
-                        💼 LinkedIn
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- Education -->
+  <section id="education" class="container">
+    <h2 class="section-title">Education & Certifications</h2>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+      <div class="card card-pad">
+        <h3>B.E. in Computer Science</h3>
+        <p class="muted">Your University</p>
+      </div>
+      <div class="card card-pad">
+        <h3>Certifications</h3>
+        <ul class="muted">
+          <li>Advanced Android Development</li>
+          <li>AI & Machine Learning Foundations (Python)</li>
+          <li>Solution Architecture Basics</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+  <!-- Contact -->
+  <section id="contact" class="container">
+    <div class="contact-grid">
+      <div class="card card-pad">
+        <h2 class="section-title">Contact</h2>
+        <p class="muted">Interested in collaborating or have a role in mind? I’d love to talk.</p>
+        <p><strong>Email:</strong> <a href="mailto:your.email@example.com" rel="me">your.email@example.com</a></p>
+        <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/yourprofile" target="_blank" rel="noopener">linkedin.com/in/yourprofile</a></p>
+        <p><strong>GitHub:</strong> <a href="https://github.com/yourusername" target="_blank" rel="noopener">github.com/yourusername</a></p>
+        <p><strong>Location:</strong> India</p>
+      </div>
+      <div class="card card-pad" aria-labelledby="contactform">
+        <h2 id="contactform" class="section-title">Quick Message</h2>
+        <form action="mailto:your.email@example.com" method="post" enctype="text/plain">
+          <label class="sr-only" for="name">Your name</label>
+          <input id="name" name="name" placeholder="Your name" required>
+          <label class="sr-only" for="email">Your email</label>
+          <input id="email" name="email" type="email" placeholder="you@example.com" required>
+          <label class="sr-only" for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Hi Sasikumar, I’d like to…" rows="5" required></textarea>
+          <button class="btn" type="submit">Send</button>
+        </form>
+        <p class="muted" style="margin-top:8px">This form uses a <code>mailto:</code> action for simplicity. Replace with your API or form backend for production.</p>
+      </div>
+    </div>
+  </section>
 
-        // Header background on scroll
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('.header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(13, 17, 23, 0.98)';
-            } else {
-                header.style.background = 'rgba(13, 17, 23, 0.95)';
-            }
-        });
-
-        // Add more floating particles
-        const particlesContainer = document.querySelector('.particles');
-        const colors = ['#58a6ff', '#a5a5f5', '#ff6b9d'];
-        
-        for (let i = 0; i < 15; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.width = Math.random() * 5 + 2 + 'px';
-            particle.style.height = particle.style.width;
-            particle.style.top = Math.random() * 100 + '%';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-            particle.style.animationDelay = Math.random() * 6 + 's';
-            particle.style.animationDuration = Math.random() * 4 + 4 + 's';
-            particle.style.opacity = '0.6';
-            particlesContainer.appendChild(particle);
-        }
-
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe project cards and skill categories
-        document.querySelectorAll('.project-card, .skill-category, .stat-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'all 0.6s ease';
-            observer.observe(el);
-        });
-    </script>
+  <footer>
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">
+        <span>© <span id="y"></span> Sasikumar Alakesan</span>
+        <span class="muted">Android · AI · CAD · Architecture</span>
+      </div>
+    </div>
+  </footer>
+  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
 </body>
 </html>
