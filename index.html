@@ -6,311 +6,871 @@
   <title>Sasikumar Alakesan · Portfolio</title>
   <meta name="description" content="Application Lead specializing in Android, AI-powered mobile, and CAD tools. Portfolio of projects, skills, and experience." />
   <meta name="color-scheme" content="light dark">
-  <meta property="og:title" content="Sasikumar Alakesan · Portfolio" />
-  <meta property="og:description" content="Android · AI · CAD · Solution Architecture" />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🛠️</text></svg>">
   <style>
     :root{
-      --bg: #0b0c10;          /* dark base */
-      --surface: #111217;     /* cards */
-      --text: #e7e7ea;        /* main text */
-      --muted: #b6b6c2;       /* secondary text */
-      --brand: #6ee7b7;       /* accent mint */
-      --brand-2: #60a5fa;     /* accent blue */
-      --ring: rgba(110,231,183,.35);
-      --border: #23242d;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
-      --radius: 18px;
-      --maxw: 1100px;
+      --bg: #0a0b0f;
+      --surface: #111218;
+      --surface-2: #1a1b23;
+      --text: #f1f1f3;
+      --text-secondary: #a8a8b2;
+      --text-muted: #6b6b7d;
+      --accent: #00d4aa;
+      --accent-2: #0ea5e9;
+      --accent-glow: rgba(0,212,170,0.2);
+      --border: #2a2b36;
+      --border-hover: #3a3b46;
+      --shadow: 0 4px 6px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-lg: 0 20px 25px rgba(0,0,0,0.15), 0 10px 10px rgba(0,0,0,0.04);
+      --shadow-glow: 0 0 30px rgba(0,212,170,0.15);
+      --radius: 16px;
+      --radius-lg: 24px;
+      --maxw: 1200px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
+    
     @media (prefers-color-scheme: light) {
       :root{
-        --bg:#f8fafc; --surface:#ffffff; --text:#0b0c10; --muted:#4b5563; --border:#e5e7eb; --shadow:0 10px 30px rgba(2,6,23,.08);
+        --bg: #fafbfc;
+        --surface: #ffffff;
+        --surface-2: #f8f9fa;
+        --text: #0f1419;
+        --text-secondary: #424242;
+        --text-muted: #6b7280;
+        --border: #e1e5e9;
+        --border-hover: #d1d5db;
+        --shadow: 0 4px 6px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.03);
+        --shadow-lg: 0 20px 25px rgba(0,0,0,0.08), 0 10px 10px rgba(0,0,0,0.02);
+        --shadow-glow: 0 0 30px rgba(0,212,170,0.1);
+        --accent-glow: rgba(0,212,170,0.1);
       }
     }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif}
-    a{color:inherit;text-decoration:none}
-    img{max-width:100%;display:block}
-    .container{max-width:var(--maxw);margin-inline:auto;padding:24px}
-    .grid{display:grid;gap:20px}
-    .btn{
-      display:inline-flex;align-items:center;gap:.6rem;padding:.7rem 1rem;border-radius:999px;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#0b0c10;font-weight:700;border:0;box-shadow:var(--shadow);
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-    .btn.ghost{background:transparent;color:var(--text);border:1px solid var(--border);box-shadow:none}
-    .chip{display:inline-block;padding:.35rem .7rem;border-radius:999px;border:1px solid var(--border);background:linear-gradient(180deg,transparent,rgba(255,255,255,.02));color:var(--muted);font-weight:600;font-size:.9rem;margin:.25rem .25rem 0 0}
-    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
-    .card-pad{padding:20px}
-    .muted{color:var(--muted)}
-    .title{font-size:clamp(1.6rem,1.1rem + 2vw,2.6rem);line-height:1.2;margin:0}
-    .subtitle{font-size:clamp(1rem,.8rem + .8vw,1.25rem);color:var(--muted);margin:.25rem 0 0}
-    .section-title{font-size:1.6rem;margin:0 0 .5rem;font-weight:800}
-    header.nav{position:sticky;top:0;backdrop-filter:saturate(160%) blur(10px);background:color-mix(in oklab, var(--bg) 80%, transparent);border-bottom:1px solid var(--border);z-index:10}
-    .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:10px}
-    .nav-brand{display:flex;align-items:center;gap:.7rem;font-weight:800}
-    .nav-links{display:flex;gap:.4rem;flex-wrap:wrap}
-    .nav-links a{padding:.55rem .9rem;border-radius:999px;border:1px solid transparent}
-    .nav-links a:hover{border-color:var(--border);background:rgba(255,255,255,.03)}
-    .hero{padding-block:48px}
-    .hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:24px}
-    .hero .portrait{aspect-ratio:1/1;border-radius:24px;border:1px solid var(--border);overflow:hidden;background:linear-gradient(180deg,#0ea5e9,#22c55e)}
-    .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
-    .badges{margin-top:14px}
-    section{padding-block:24px}
-    .projects{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
-    .project .hdr{display:flex;align-items:center;justify-content:space-between;gap:8px}
-    .project h3{margin:.2rem 0 .4rem;font-size:1.1rem}
-    .project p{margin:0;color:var(--muted)}
-    .timeline{position:relative}
-    .timeline::before{content:"";position:absolute;left:10px;top:0;bottom:0;width:2px;background:var(--border)}
-    .tl-item{position:relative;padding-left:34px;margin-bottom:16px}
-    .tl-item::before{content:"";position:absolute;left:3px;top:.45rem;width:14px;height:14px;border-radius:999px;background:linear-gradient(135deg,var(--brand),var(--brand-2));box-shadow:0 0 0 4px color-mix(in oklab, var(--bg) 70%, transparent)}
-    .contact-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:20px}
-    form{display:grid;gap:12px}
-    input,textarea{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:var(--surface);color:var(--text)}
-    footer{padding:32px 24px;border-top:1px solid var(--border);color:var(--muted)}
-    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-    @media (max-width: 860px){
-      .hero-grid{grid-template-columns:1fr}
-      .contact-grid{grid-template-columns:1fr}
-      .nav-links{display:none}
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
     }
-    @media print{
-      header.nav, .cta, form, .nav-links{display:none !important}
-      body{background:#fff;color:#000}
-      .card,.chip{border-color:#bbb;box-shadow:none}
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Smooth scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--border-hover); }
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 { line-height: 1.2; font-weight: 700; }
+    p { margin-bottom: 1rem; }
+    a { color: inherit; text-decoration: none; transition: var(--transition); }
+
+    /* Layout */
+    .container { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+    .grid { display: grid; gap: 24px; }
+    
+    /* Enhanced Button Styles */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.875rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: white;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .btn.primary:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg), var(--shadow-glow);
+    }
+
+    .btn.secondary {
+      background: var(--surface-2);
+      color: var(--text);
+      border: 2px solid var(--border);
+    }
+
+    .btn.secondary:hover {
+      border-color: var(--accent);
+      background: var(--surface);
+      transform: translateY(-1px);
+    }
+
+    /* Enhanced Cards */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--border-hover);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card-pad { padding: 32px; }
+
+    /* Enhanced Chips */
+    .chip {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      margin: 0.25rem 0.5rem 0.25rem 0;
+      border-radius: 50px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .chip:hover {
+      background: var(--accent-glow);
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: scale(1.05);
+    }
+
+    /* Navigation */
+    .nav {
+      position: sticky;
+      top: 0;
+      background: rgba(10, 11, 15, 0.8);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      padding: 1rem 0;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+
+    .nav-logo {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .nav-links a {
+      padding: 0.75rem 1.25rem;
+      border-radius: 50px;
+      color: var(--text-secondary);
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: var(--transition);
+      transform: translateX(-50%);
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+      background: var(--accent-glow);
+    }
+
+    .nav-links a:hover::after {
+      width: 80%;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 80px 0 60px;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(ellipse at top, var(--accent-glow), transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .hero-content {
+      z-index: 1;
+      position: relative;
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 900;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, var(--text), var(--accent));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.1;
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-portrait {
+      position: relative;
+      aspect-ratio: 1;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      transition: var(--transition);
+    }
+
+    .hero-portrait::before {
+      content: '';
+      position: absolute;
+      inset: 2px;
+      background: var(--surface);
+      border-radius: calc(var(--radius-lg) - 2px);
+      background-image: 
+        radial-gradient(circle at 30% 20%, var(--accent-glow), transparent 50%),
+        radial-gradient(circle at 80% 80%, var(--accent-glow), transparent 50%);
+    }
+
+    .hero-portrait:hover {
+      transform: rotate(2deg) scale(1.02);
+      box-shadow: var(--shadow-lg), var(--shadow-glow);
+    }
+
+    /* Skills Grid */
+    .skills-grid {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .skill-category {
+      padding: 32px;
+    }
+
+    .skill-category h3 {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    /* Projects Grid */
+    .projects-grid {
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+
+    .project-card {
+      padding: 32px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .project-title {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-description {
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
+
+    .project-tech {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 1rem;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--accent), var(--accent-2));
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 2rem;
+      margin-left: 2rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -3rem;
+      top: 0.5rem;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 4px solid var(--bg);
+      box-shadow: 0 0 0 4px var(--accent-glow);
+    }
+
+    .timeline-item h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-item .company {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .timeline-item .date {
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .timeline-item ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .timeline-item li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-secondary);
+    }
+
+    .timeline-item li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    /* Contact Section */
+    .contact-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .contact-info p {
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .contact-info strong {
+      color: var(--accent);
+      min-width: 80px;
+    }
+
+    .contact-info a:hover {
+      color: var(--accent);
+    }
+
+    /* Form Styles */
+    .contact-form {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .form-group {
+      position: relative;
+    }
+
+    .form-input, .form-textarea {
+      width: 100%;
+      padding: 1rem 1.25rem;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface-2);
+      color: var(--text);
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+
+    .form-input:focus, .form-textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 80px;
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      background: var(--surface-2);
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-in {
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        text-align: center;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 16px;
+      }
+
+      .card-pad {
+        padding: 24px;
+      }
+
+      .hero {
+        padding: 60px 0 40px;
+      }
+    }
+
+    /* Accessibility */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* Focus styles */
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
     }
   </style>
-  <script>
-    // Simple hash-aware active link styling
-    addEventListener('hashchange',()=>{
-      const links=document.querySelectorAll('.nav-links a');
-      links.forEach(a=>a.classList.toggle('active', a.getAttribute('href')===location.hash));
-    });
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Sasikumar Alakesan",
-    "jobTitle": "Application Lead",
-    "sameAs": [
-      "https://www.linkedin.com/in/yourprofile",
-      "https://github.com/yourusername"
-    ],
-    "knowsAbout": ["Android", "Kotlin", "Jetpack Compose", "Clean Architecture", "OpenGL ES", "AI", "CAD"],
-    "address": {"@type":"PostalAddress","addressCountry":"IN"}
-  }
-  </script>
 </head>
 <body>
-  <!-- Nav -->
-  <header class="nav">
+  <!-- Navigation -->
+  <nav class="nav">
     <div class="container nav-inner">
       <div class="nav-brand">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 3l7 4v10l-7 4-7-4V7l7-4z" stroke="currentColor" stroke-width="1.5"/></svg>
+        <div class="nav-logo">S</div>
         <span>Sasikumar Alakesan</span>
       </div>
-      <nav class="nav-links" aria-label="Primary">
+      <div class="nav-links">
         <a href="#about">About</a>
         <a href="#skills">Skills</a>
         <a href="#projects">Projects</a>
         <a href="#experience">Experience</a>
-        <a href="#education">Education</a>
         <a href="#contact">Contact</a>
-      </nav>
-    </div>
-  </header>
-
-  <!-- Hero -->
-  <section class="hero container">
-    <div class="hero-grid">
-      <div>
-        <h1 class="title">Application Lead · Android & AI Enthusiast · Solution Architect in Progress</h1>
-        <p class="subtitle">Bridging mobile innovation with intelligent solutions.</p>
-        <p class="muted">I’m an Application Lead with 10+ years of experience building high‑quality Android apps. I focus on clean architecture, scalable design, and integrating AI into mobile solutions. I’m currently exploring advanced CAD tools, AI‑powered app generation, and moving toward Solution Architecture.</p>
-        <div class="cta">
-          <a class="btn" href="#projects">View Projects</a>
-          <a class="btn ghost" href="mailto:your.email@example.com">Email Me</a>
-          <a class="btn ghost" href="#" aria-label="Download résumé (PDF)">Résumé</a>
-        </div>
-        <div class="badges" aria-label="Key areas">
-          <span class="chip">Android (Kotlin, Java)</span>
-          <span class="chip">Jetpack Compose · MVVM</span>
-          <span class="chip">Clean Architecture</span>
-          <span class="chip">OpenGL ES 2.0</span>
-          <span class="chip">AI · RAG concepts</span>
-          <span class="chip">CAD & Geometry</span>
-        </div>
-      </div>
-      <div>
-        <div class="portrait card"></div>
       </div>
     </div>
-  </section>
+  </nav>
 
-  <!-- About -->
-  <section id="about" class="container">
-    <div class="card card-pad">
-      <h2 class="section-title">About Me</h2>
-      <p>With a strong foundation in Android development and expertise in designing scalable, modular applications, I’ve led projects across domains like CAD-based floor planning, AI‑powered tools, and enterprise mobile apps. I build products that not only perform well, but solve real problems elegantly.</p>
-      <p>Recently, I’ve focused on integrating AI with mobile platforms, creating intelligent design tools, and developing custom CAD solutions with OpenGL ES. I enjoy mentoring teams, shaping solution architecture, and delivering features users love.</p>
-    </div>
-  </section>
-
-  <!-- Skills -->
-  <section id="skills" class="container">
-    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
-      <div class="card card-pad">
-        <h2 class="section-title">Mobile Development</h2>
-        <div class="chips">
-          <span class="chip">Android (Kotlin, Java)</span>
-          <span class="chip">Jetpack Compose</span>
-          <span class="chip">MVVM</span>
-          <span class="chip">Clean Architecture</span>
-          <span class="chip">Flutter (Dart)</span>
-        </div>
-      </div>
-      <div class="card card-pad">
-        <h2 class="section-title">Specialized Domains</h2>
-        <span class="chip">Custom CAD tools (2D)</span>
-        <span class="chip">Snapping & constraints</span>
-        <span class="chip">OpenGL ES 2.0 rendering</span>
-        <span class="chip">Gesture handling (zoom · pan · rotate)</span>
-      </div>
-      <div class="card card-pad">
-        <h2 class="section-title">Backend & Data</h2>
-        <span class="chip">REST APIs</span>
-        <span class="chip">Firebase</span>
-        <span class="chip">SQLite · Room</span>
-        <span class="chip">Python (AI/ML foundations)</span>
-        <span class="chip">RAG concepts</span>
-      </div>
-      <div class="card card-pad">
-        <h2 class="section-title">Other</h2>
-        <span class="chip">Team Leadership</span>
-        <span class="chip">Solution Architecture</span>
-        <span class="chip">Cross‑platform strategy</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Projects -->
-  <section id="projects" class="container">
-    <h2 class="section-title">Projects</h2>
-    <div class="grid projects">
-      <article class="card card-pad project">
-        <div class="hdr"><h3>AI‑Powered CAD Floor Planner</h3><span class="chip">Android</span></div>
-        <p>Custom Android CAD app for drawing, editing, and measuring floor plans. Features snapping, constraints, and real‑time area/perimeter calculations with AI‑powered layout suggestions.</p>
-        <p class="muted">Keywords: Kotlin, OpenGL ES, Geometry, AI</p>
-      </article>
-      <article class="card card-pad project">
-        <div class="hdr"><h3>OpenGL ES Drawing Tool</h3><span class="chip">OpenGL ES 2.0</span></div>
-        <p>Freehand and shape‑based drawing with real‑time zoom, pan, and grid snapping. Includes undo/redo, color picker, stroke thickness control, and PNG export.</p>
-        <p class="muted">Keywords: Android Canvas, Rendering, UX</p>
-      </article>
-      <article class="card card-pad project">
-        <div class="hdr"><h3>AI‑Driven Mobile App Generator (Prototype)</h3><span class="chip">AI</span></div>
-        <p>Prototype system to generate functional mobile apps from plain‑text descriptions using open‑source models, integrated with Android front‑ends.</p>
-        <p class="muted">Keywords: LLMs, Tooling, DX</p>
-      </article>
-      <article class="card card-pad project">
-        <div class="hdr"><h3>Enterprise Android Solutions</h3><span class="chip">Architecture</span></div>
-        <p>Led end‑to‑end development of multiple high‑performance apps using Clean Architecture, collaborating across teams to deliver resilient features at scale.</p>
-        <p class="muted">Keywords: MVVM, Testing, CI/CD</p>
-      </article>
-    </div>
-  </section>
-
-  <!-- Experience -->
-  <section id="experience" class="container">
-    <h2 class="section-title">Experience</h2>
-    <div class="card card-pad timeline">
-      <div class="tl-item">
-        <h3>Application Lead <span class="muted">— Current Company</span></h3>
-        <p class="muted">YYYY – Present</p>
-        <ul>
-          <li>Lead design and development of Android applications with modern architectures.</li>
-          <li>Mentor developers and drive cross‑functional collaboration.</li>
-          <li>Champion AI integrations and new tool development.</li>
-        </ul>
-      </div>
-      <div class="tl-item">
-        <h3>Senior Android Developer <span class="muted">— Previous Company</span></h3>
-        <p class="muted">YYYY – YYYY</p>
-        <ul>
-          <li>Built complex, scalable features and optimized app performance.</li>
-          <li>Owned key modules from concept to deployment.</li>
-        </ul>
-      </div>
-      <div class="tl-item">
-        <h3>Android Developer <span class="muted">— Previous Company</span></h3>
-        <p class="muted">YYYY – YYYY</p>
-        <ul>
-          <li>Developed and maintained native Android apps.</li>
-          <li>Introduced architectural improvements to improve maintainability.</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- Education -->
-  <section id="education" class="container">
-    <h2 class="section-title">Education & Certifications</h2>
-    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
-      <div class="card card-pad">
-        <h3>B.E. in Computer Science</h3>
-        <p class="muted">Your University</p>
-      </div>
-      <div class="card card-pad">
-        <h3>Certifications</h3>
-        <ul class="muted">
-          <li>Advanced Android Development</li>
-          <li>AI & Machine Learning Foundations (Python)</li>
-          <li>Solution Architecture Basics</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="container">
-    <div class="contact-grid">
-      <div class="card card-pad">
-        <h2 class="section-title">Contact</h2>
-        <p class="muted">Interested in collaborating or have a role in mind? I’d love to talk.</p>
-        <p><strong>Email:</strong> <a href="mailto:your.email@example.com" rel="me">your.email@example.com</a></p>
-        <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/yourprofile" target="_blank" rel="noopener">linkedin.com/in/yourprofile</a></p>
-        <p><strong>GitHub:</strong> <a href="https://github.com/yourusername" target="_blank" rel="noopener">github.com/yourusername</a></p>
-        <p><strong>Location:</strong> India</p>
-      </div>
-      <div class="card card-pad" aria-labelledby="contactform">
-        <h2 id="contactform" class="section-title">Quick Message</h2>
-        <form action="mailto:your.email@example.com" method="post" enctype="text/plain">
-          <label class="sr-only" for="name">Your name</label>
-          <input id="name" name="name" placeholder="Your name" required>
-          <label class="sr-only" for="email">Your email</label>
-          <input id="email" name="email" type="email" placeholder="you@example.com" required>
-          <label class="sr-only" for="message">Message</label>
-          <textarea id="message" name="message" placeholder="Hi Sasikumar, I’d like to…" rows="5" required></textarea>
-          <button class="btn" type="submit">Send</button>
-        </form>
-        <p class="muted" style="margin-top:8px">This form uses a <code>mailto:</code> action for simplicity. Replace with your API or form backend for production.</p>
-      </div>
-    </div>
-  </section>
-
-  <footer>
+  <!-- Hero Section -->
+  <section class="hero">
     <div class="container">
-      <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">
-        <span>© <span id="y"></span> Sasikumar Alakesan</span>
-        <span class="muted">Android · AI · CAD · Architecture</span>
+      <div class="hero-grid">
+        <div class="hero-content">
+          <h1 class="hero-title">Lead - Flutter & Android Developer</h1>
+          <p class="hero-subtitle">Building innovative mobile solutions across platforms</p>
+          <p class="hero-description">
+            With 9+ years of experience in mobile application development, I specialize in Android and Flutter applications. 
+            From kiosk applications to complex financial platforms, I deliver scalable solutions that meet diverse business needs.
+          </p>
+          <div class="hero-actions">
+            <a href="#projects" class="btn primary">View My Work</a>
+            <a href="mailto:your.email@example.com" class="btn secondary">Get In Touch</a>
+            <a href="#" class="btn secondary">Download CV</a>
+          </div>
+          <div class="hero-skills">
+            <span class="chip">Flutter & Dart</span>
+            <span class="chip">Android (Java/Kotlin)</span>
+            <span class="chip">Cross-Platform Development</span>
+            <span class="chip">Kiosk Applications</span>
+            <span class="chip">Payment Gateways</span>
+            <span class="chip">Team Leadership</span>
+          </div>
+        </div>
+        <div class="hero-portrait"></div>
       </div>
     </div>
-  </footer>
-  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
-</body>
-</html>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="container">
+    <div class="card card-pad animate-in">
+      <h2>About Me</h2>
+      <p>
+        I'm passionate about creating mobile applications that not only meet technical requirements but also deliver exceptional user experiences. 
+        My journey in software development has been driven by curiosity and a constant desire to learn and implement the latest technologies.
+      </p>
+      <p>
+        Currently, I'm exploring the intersection of AI and mobile development, working on intelligent CAD tools, and advancing toward solution architecture. 
+        I believe in clean code, scalable designs, and mentoring teams to achieve their best potential.
+      </p>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="container">
+    <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem;">Skills & Expertise</h2>
+    <div class="grid skills-grid">
+      <div class="card skill-category">
+        <h3>Mobile Development</h3>
+        <div>
+          <span class="chip">Android (Kotlin/Java)</span>
+          <span class="chip">Jetpack Compose</span>
+          <span class="chip">MVVM Architecture</span>
+          <span class="chip">Clean Architecture</span>
+          <span class="chip">Flutter & Dart</span>
+          <span class="chip">React Native</span>
+        </div>
+      </div>
+      <div class="card skill-category">
+        <h3>Specialized Domains</h3>
+        <div>
+          <span class="chip">Custom CAD Tools</span>
+          <span class="chip">OpenGL ES 2.0</span>
+          <span class="chip">2D Graphics & Rendering</span>
+          <span class="chip">Gesture Recognition</span>
+          <span class="chip">Real-time Processing</span>
+        </div>
+      </div>
+      <div class="card skill-category">
+        <h3>AI & Backend</h3>
+        <div>
+          <span class="chip">AI/ML Integration</span>
+          <span class="chip">RAG Systems</span>
+          <span class="chip">Python</span>
+          <span class="chip">REST APIs</span>
+          <span class="chip">Firebase</span>
+          <span class="chip">SQLite & Room</span>
+        </div>
+      </div>
+      <div class="card skill-category">
+        <h3>Leadership & Architecture</h3>
+        <div>
+          <span class="chip">Team Leadership</span>
+          <span class="chip">Solution Architecture</span>
+          <span class="chip">Code Review</span>
+          <span class="chip">Mentoring</span>
+          <span class="chip">Agile Methodologies</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="container">
+    <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem;">Featured Projects</h2>
+    <div class="grid projects-grid">
+      <article class="card project-card">
+        <div class="project-header">
+          <div>
+            <h3 class="project-title">AI-Powered CAD Floor Planner</h3>
+            <span class="chip">Android</span>
+          </div>
+        </div>
+        <p class="project-description">
+          Revolutionary Android CAD application featuring intelligent floor plan design with AI-powered layout suggestions. 
+          Includes advanced snapping mechanisms, real-time measurements, and constraint-based drawing tools.
+        </p>
+        <p class="project-tech">Built with: Kotlin • OpenGL ES • Custom Geometry Engine • AI/ML Integration</p>
+      </article>
+
+      <article class="card project-card">
+        <div class="project-header">
+          <div>
+            <h3 class="project-title">Real-time Drawing Engine</h3>
+            <span class="chip">OpenGL ES</span>
+          </div>
+        </div>
+        <p class="project-description">
+          High-performance drawing application with smooth real-time rendering, multi-touch gestures, and professional-grade tools. 
+          Features include layer management, brush customization, and vector export capabilities.
+        </p>
+        <p class="project-tech">Built with: OpenGL ES 2.0 • Custom Shaders • Advanced Touch Handling • PNG/SVG Export</p>
+      </article>
+
+      <article class="card project-card">
+        <div class="project-header">
+          <div>
+            <h3 class="project-title">AI App Generation Platform</h3>
+            <span class="chip">AI/ML</span>
+          </div>
+        </div>
+        <p class="project-description">
+          Experimental platform for generating functional mobile applications from natural language descriptions. 
+          Leverages open-source LLMs and custom templates to create production-ready code.
+        </p>
+        <p class="project-tech">Built with: Python • LLM Integration • Code Generation • Android SDK</p>
+      </article>
+
+      <article class="card project-card">
+        <div class="project-header">
+          <div>
+            <h3 class="project-title">Enterprise Mobile Solutions</h3>
+            <span class="chip">Architecture</span>
+          </div>
+        </div>
+        <p class="project-description">
+          Large-scale Android applications serving thousands of users with complex business logic. 
+          Implemented clean architecture patterns, automated testing, and CI/CD pipelines.
+        </p>
+        <p class="project-tech">Built with: MVVM • Clean Architecture • Unit Testing • CI/CD • Performance Optimization</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience" class="container">
+    <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem;">Professional Journey</h2>
+    <div class="card card-pad">
+      <div class="timeline">
+        <div class="timeline-item">
+          <h3>Application Lead <span class="company">• Current Company</span></h3>
+          <p class="date">2020 – Present</p>
+          <ul>
+            <li>Lead architecture decisions for multiple Android applications serving 100K+ users</li>
+            <li>Mentor a team of 8 developers in modern Android development practices</li>
+            <li>Drive AI integration initiatives and establish best practices for ML model deployment</li>
+            <li>Collaborate with product teams to define technical roadmaps and feature specifications</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item">
+          <h3>Senior Android Developer <span class="company">• Previous Company</span></h3>
+          <p class="date">2018 – 2020</p>
+          <ul>
+            <li>Developed and maintained complex features for flagship Android applications</li>
+            <li>Optimized app performance resulting in 40% improvement in loading times</li>
+            <li>Implemented robust testing strategies with 80%+ code coverage</li>
+            <li>Led migration from Java to Kotlin across multiple projects</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item">
+          <h3>Android Developer <span class="company">• Previous Company</span></h3>
+          <p class="date">2015 – 2018</p>
+          <ul>
+            <li>Built native Android applications from concept to production deployment</li>
+            <li>Introduced modern architectural patterns to improve code maintainability</li>
+            <li>Collaborated with UX/UI teams to implement pixel-perfect designs</li>
+            <li>Participated in code reviews and established development standards</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="container">
+    <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem;">Let's Connect</h2>
+    <div class="grid contact-grid">
+      <div class="card card-pad">
+        <h3>Get In Touch</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 2rem;">
+          I'm always interested in discussing new opportunities, innovative projects, or simply connecting with fellow developers.
+        </p>
+        <div class="contact-info">
+          <p><strong>Email:</strong> <a href="mailto:your.email@example.com">your.email@example.com</a></p>
+          <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/yourprofile" target="_blank">linkedin.com/in/yourprofile</a></p>
+          <p><strong>GitHub:</strong> <a href="https://github.com/yourusername" target="_blank">github.com/yourusername</a></p>
+          <p><strong>Location:</strong> Chennai, Tamil Nadu, India</p>
+        </div>
+      </div>
+
+      <div class="card card-pad">
+        <h3>Send a Message</h3>
+        <form class="contact-form" action="mailto:your.email@example.com" method="post" enctype="text/plain">
+          <div class="form-group">
+            <label for="name" class="sr-only">Your Name</label>
+            <input type="text" id="name" name="name" placeholder="Your Name" class="form-input" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="email" class="sr-only">Your Email
