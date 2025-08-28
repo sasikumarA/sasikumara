@@ -334,7 +334,32 @@
       transition: var(--transition);
     }
 
-    .hero-portrait::before {
+    .hero-portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      border-radius: var(--radius-lg);
+      /* Optimize large images */
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+    }
+
+    /* Loading state for large images */
+    .hero-portrait {
+      background-color: var(--surface-2);
+    }
+
+    .hero-portrait img {
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .hero-portrait img.loaded {
+      opacity: 1;
+    }
+
+    .hero-portrait.placeholder::before {
       content: '';
       position: absolute;
       inset: 2px;
@@ -348,6 +373,37 @@
     .hero-portrait:hover {
       transform: rotate(2deg) scale(1.02);
       box-shadow: var(--shadow-lg), var(--shadow-glow);
+    }
+
+    /* Project Images */
+    .project-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: var(--radius);
+      margin-bottom: 1rem;
+      transition: var(--transition);
+    }
+
+    .project-image:hover {
+      transform: scale(1.02);
+    }
+
+    /* Company Logos */
+    .company-logo {
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      margin-right: 0.5rem;
+      vertical-align: middle;
+    }
+
+    /* Skills Icons */
+    .skill-icon {
+      width: 20px;
+      height: 20px;
+      margin-right: 0.5rem;
+      vertical-align: middle;
     }
 
     /* Skills Grid */
@@ -675,7 +731,9 @@
             <span class="chip">Team Leadership</span>
           </div>
         </div>
-        <div class="hero-portrait"></div>
+        <div class="hero-portrait">
+          <img src="images/profile-photo.jpg" alt="Sasikumar Alakesan - Lead Flutter & Android Developer" loading="lazy" onload="this.classList.add('loaded')">
+        </div>
       </div>
     </div>
   </section>
@@ -685,12 +743,12 @@
     <div class="card card-pad animate-in">
       <h2>About Me</h2>
       <p>
-        I'm passionate about creating mobile applications that not only meet technical requirements but also deliver exceptional user experiences. 
-        My journey in software development has been driven by curiosity and a constant desire to learn and implement the latest technologies.
+        I'm passionate about creating mobile applications that solve real-world problems across various industries. 
+        My expertise spans from government applications to financial platforms, kiosk systems, and e-commerce solutions.
       </p>
       <p>
-        Currently, I'm exploring the intersection of AI and mobile development, working on intelligent CAD tools, and advancing toward solution architecture. 
-        I believe in clean code, scalable designs, and mentoring teams to achieve their best potential.
+        I have extensive experience with both native Android development and cross-platform Flutter development, 
+        leading teams and delivering high-quality applications that serve thousands of users globally.
       </p>
     </div>
   </section>
@@ -702,43 +760,45 @@
       <div class="card skill-category">
         <h3>Mobile Development</h3>
         <div>
-          <span class="chip">Android (Kotlin/Java)</span>
-          <span class="chip">Jetpack Compose</span>
-          <span class="chip">MVVM Architecture</span>
-          <span class="chip">Clean Architecture</span>
           <span class="chip">Flutter & Dart</span>
-          <span class="chip">React Native</span>
+          <span class="chip">Android (Java/Kotlin)</span>
+          <span class="chip">Cross-Platform Development</span>
+          <span class="chip">Cordova Development</span>
+          <span class="chip">Adaptive UI Design</span>
+          <span class="chip">Play Store Publishing</span>
         </div>
       </div>
       <div class="card skill-category">
-        <h3>Specialized Domains</h3>
+        <h3>Specialized Applications</h3>
         <div>
-          <span class="chip">Custom CAD Tools</span>
-          <span class="chip">OpenGL ES 2.0</span>
-          <span class="chip">2D Graphics & Rendering</span>
-          <span class="chip">Gesture Recognition</span>
-          <span class="chip">Real-time Processing</span>
+          <span class="chip">Kiosk Applications</span>
+          <span class="chip">Financial Platforms</span>
+          <span class="chip">Government Solutions</span>
+          <span class="chip">E-commerce Apps</span>
+          <span class="chip">2D Canvas Drawing</span>
+          <span class="chip">Land Valuation Systems</span>
         </div>
       </div>
       <div class="card skill-category">
-        <h3>AI & Backend</h3>
+        <h3>Backend & Integration</h3>
         <div>
-          <span class="chip">AI/ML Integration</span>
-          <span class="chip">RAG Systems</span>
-          <span class="chip">Python</span>
-          <span class="chip">REST APIs</span>
-          <span class="chip">Firebase</span>
-          <span class="chip">SQLite & Room</span>
+          <span class="chip">Payment Gateway Integration</span>
+          <span class="chip">API Development</span>
+          <span class="chip">SQLite & Room Database</span>
+          <span class="chip">Firebase Services</span>
+          <span class="chip">Push Notifications</span>
+          <span class="chip">SDK Integration</span>
         </div>
       </div>
       <div class="card skill-category">
-        <h3>Leadership & Architecture</h3>
+        <h3>Tools & Methodologies</h3>
         <div>
-          <span class="chip">Team Leadership</span>
-          <span class="chip">Solution Architecture</span>
-          <span class="chip">Code Review</span>
-          <span class="chip">Mentoring</span>
+          <span class="chip">Android Studio & VS Code</span>
+          <span class="chip">Git Version Control</span>
+          <span class="chip">Jenkins CI/CD</span>
           <span class="chip">Agile Methodologies</span>
+          <span class="chip">JIRA Project Management</span>
+          <span class="chip">Code Reviews</span>
         </div>
       </div>
     </div>
@@ -751,57 +811,61 @@
       <article class="card project-card">
         <div class="project-header">
           <div>
-            <h3 class="project-title">AI-Powered CAD Floor Planner</h3>
+            <h3 class="project-title">LAVMIS - Land Valuation System</h3>
             <span class="chip">Android</span>
           </div>
         </div>
+        <!-- <img src="images/lavmis-screenshot.jpg" alt="LAVMIS Land Valuation System Interface" class="project-image"> -->
         <p class="project-description">
-          Revolutionary Android CAD application featuring intelligent floor plan design with AI-powered layout suggestions. 
-          Includes advanced snapping mechanisms, real-time measurements, and constraint-based drawing tools.
+          Modernized land valuation system for Uganda's Ministry of Land, Housing & Urban Development. 
+          Features 2D canvas drawing for property sketches, automated tracking, and enhanced transparency in valuation services.
         </p>
-        <p class="project-tech">Built with: Kotlin • OpenGL ES • Custom Geometry Engine • AI/ML Integration</p>
+        <p class="project-tech">Built with: Android • 2D Canvas Drawing • API Integration • Property Sketching</p>
       </article>
 
       <article class="card project-card">
         <div class="project-header">
           <div>
-            <h3 class="project-title">Real-time Drawing Engine</h3>
-            <span class="chip">OpenGL ES</span>
+            <h3 class="project-title">Aditya Birla Capital Digital</h3>
+            <span class="chip">Flutter</span>
           </div>
         </div>
+        <!-- <img src="images/abcd-screenshot.jpg" alt="Aditya Birla Capital Digital App Interface" class="project-image"> -->
         <p class="project-description">
-          High-performance drawing application with smooth real-time rendering, multi-touch gestures, and professional-grade tools. 
-          Features include layer management, brush customization, and vector export capabilities.
+          Comprehensive financial management platform offering investments, insurance, loans, and payments. 
+          Cross-platform application with web and mobile support, payment gateway integrations, and real-time financial data.
         </p>
-        <p class="project-tech">Built with: OpenGL ES 2.0 • Custom Shaders • Advanced Touch Handling • PNG/SVG Export</p>
+        <p class="project-tech">Built with: Flutter • Payment Gateways • Web & Mobile • API Integration</p>
       </article>
 
       <article class="card project-card">
         <div class="project-header">
           <div>
-            <h3 class="project-title">AI App Generation Platform</h3>
-            <span class="chip">AI/ML</span>
+            <h3 class="project-title">Siddhi Super App - TATA AIA</h3>
+            <span class="chip">Flutter</span>
           </div>
         </div>
+        <!-- <img src="images/siddhi-screenshot.jpg" alt="Siddhi Super App Interface" class="project-image"> -->
         <p class="project-description">
-          Experimental platform for generating functional mobile applications from natural language descriptions. 
-          Leverages open-source LLMs and custom templates to create production-ready code.
+          All-in-one business application for TATA AIA Life providing policy management, customer details, 
+          business dashboards, commission tracking, and real-time business insights.
         </p>
-        <p class="project-tech">Built with: Python • LLM Integration • Code Generation • Android SDK</p>
+        <p class="project-tech">Built with: Flutter • Business Dashboards • Real-time Data • Team Management</p>
       </article>
 
       <article class="card project-card">
         <div class="project-header">
           <div>
-            <h3 class="project-title">Enterprise Mobile Solutions</h3>
-            <span class="chip">Architecture</span>
+            <h3 class="project-title">KOT - Restaurant Kiosk System</h3>
+            <span class="chip">Android</span>
           </div>
         </div>
+        <!-- <img src="images/kot-screenshot.jpg" alt="KOT Restaurant Kiosk System Interface" class="project-image"> -->
         <p class="project-description">
-          Large-scale Android applications serving thousands of users with complex business logic. 
-          Implemented clean architecture patterns, automated testing, and CI/CD pipelines.
+          Complete restaurant management system with customer ordering, kitchen management, and cashier applications. 
+          Features payment terminal integration, receipt printing, and barcode scanning for efficient operations.
         </p>
-        <p class="project-tech">Built with: MVVM • Clean Architecture • Unit Testing • CI/CD • Performance Optimization</p>
+        <p class="project-tech">Built with: Android Kiosk • Payment Terminals • Printer Integration • POS System</p>
       </article>
     </div>
   </section>
@@ -812,35 +876,44 @@
     <div class="card card-pad">
       <div class="timeline">
         <div class="timeline-item">
-          <h3>Application Lead <span class="company">• Current Company</span></h3>
-          <p class="date">2020 – Present</p>
+          <h3>
+            <!-- <img src="images/impiger-logo.png" alt="Impiger Technologies" class="company-logo"> -->
+            Lead - Flutter & Android <span class="company">• Impiger Technologies</span>
+          </h3>
+          <p class="date">Apr 2023 – Present</p>
           <ul>
-            <li>Lead architecture decisions for multiple Android applications serving 100K+ users</li>
-            <li>Mentor a team of 8 developers in modern Android development practices</li>
-            <li>Drive AI integration initiatives and establish best practices for ML model deployment</li>
-            <li>Collaborate with product teams to define technical roadmaps and feature specifications</li>
+            <li>Leading development teams for complex mobile applications across multiple platforms</li>
+            <li>Architecting scalable solutions for government and enterprise clients</li>
+            <li>Mentoring developers in modern mobile development practices</li>
+            <li>Managing end-to-end project delivery from requirements to production</li>
           </ul>
         </div>
 
         <div class="timeline-item">
-          <h3>Senior Android Developer <span class="company">• Previous Company</span></h3>
-          <p class="date">2018 – 2020</p>
+          <h3>
+            <!-- <img src="images/impiger-logo.png" alt="Impiger Technologies" class="company-logo"> -->
+            Senior Engineer - Android & Flutter <span class="company">• Impiger Technologies</span>
+          </h3>
+          <p class="date">Apr 2019 – Apr 2023</p>
           <ul>
-            <li>Developed and maintained complex features for flagship Android applications</li>
-            <li>Optimized app performance resulting in 40% improvement in loading times</li>
-            <li>Implemented robust testing strategies with 80%+ code coverage</li>
-            <li>Led migration from Java to Kotlin across multiple projects</li>
+            <li>Developed complex financial and government applications using Flutter and Android</li>
+            <li>Implemented payment gateway integrations and security features</li>
+            <li>Led code reviews and established development best practices</li>
+            <li>Collaborated with international clients including UAE and European markets</li>
           </ul>
         </div>
 
         <div class="timeline-item">
-          <h3>Android Developer <span class="company">• Previous Company</span></h3>
-          <p class="date">2015 – 2018</p>
+          <h3>
+            <!-- <img src="images/adyas-logo.png" alt="Adyas Info Tech" class="company-logo"> -->
+            Senior Android Developer <span class="company">• Adyas Info Tech</span>
+          </h3>
+          <p class="date">Jul 2015 – Mar 2019</p>
           <ul>
-            <li>Built native Android applications from concept to production deployment</li>
-            <li>Introduced modern architectural patterns to improve code maintainability</li>
-            <li>Collaborated with UX/UI teams to implement pixel-perfect designs</li>
-            <li>Participated in code reviews and established development standards</li>
+            <li>Built native Android applications for various industries including e-commerce and hospitality</li>
+            <li>Developed kiosk applications for restaurant management systems</li>
+            <li>Integrated multiple payment gateways and POS system connections</li>
+            <li>Implemented MVVM and MVP architectural patterns</li>
           </ul>
         </div>
       </div>
@@ -857,16 +930,17 @@
           I'm always interested in discussing new opportunities, innovative projects, or simply connecting with fellow developers.
         </p>
         <div class="contact-info">
-          <p><strong>Email:</strong> <a href="mailto:your.email@example.com">your.email@example.com</a></p>
-          <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/yourprofile" target="_blank">linkedin.com/in/yourprofile</a></p>
-          <p><strong>GitHub:</strong> <a href="https://github.com/yourusername" target="_blank">github.com/yourusername</a></p>
-          <p><strong>Location:</strong> Chennai, Tamil Nadu, India</p>
+          <p><strong>Email:</strong> <a href="mailto:sasikumar.alakesan@example.com">sasikumar.alakesan@example.com</a></p>
+          <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/sasikumar-alakesan" target="_blank">linkedin.com/in/sasikumar-alakesan</a></p>
+          <p><strong>GitHub:</strong> <a href="https://github.com/sasikumar-alakesan" target="_blank">github.com/sasikumar-alakesan</a></p>
+          <p><strong>Location:</strong> Coimbatore, Tamil Nadu, India</p>
+          <p><strong>Experience:</strong> 9+ Years in Mobile Development</p>
         </div>
       </div>
 
       <div class="card card-pad">
         <h3>Send a Message</h3>
-        <form class="contact-form" action="mailto:your.email@example.com" method="post" enctype="text/plain">
+        <form class="contact-form" action="mailto:sasikumar.alakesan@example.com" method="post" enctype="text/plain">
           <div class="form-group">
             <label for="name" class="sr-only">Your Name</label>
             <input type="text" id="name" name="name" placeholder="Your Name" class="form-input" required>
